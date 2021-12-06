@@ -18,9 +18,12 @@ class Fanart(models.Model):
 	def __str__(self):
 		return 'Fan '+self.piece
 
+
+
+
 class Movie(models.Model):
 	movie_id=models.IntegerField(blank=True, null=True, unique=True)
-	fanart=models.ManyToManyField(Fanart, related_name='movie')
+
 
 	def get_absolute_url(self):
 		return reverse('movie_detail', kwargs={'movie_id': self.movie_id})
@@ -28,15 +31,23 @@ class Movie(models.Model):
 	def __str__(self):
 		return 'Movie'+str(self.movie_id)
 
+
+
+
+
 class TV(models.Model):
 	tv_id=models.IntegerField(blank=True, null=True, unique=True)
-	fanart=models.ManyToManyField(Fanart, related_name='tv')
+
 
 	def get_absolute_url(self):
 		return reverse('tv_detail', kwargs={'tv_id': self.tv_id})
 
 	def __str__(self):
 		return 'TV'+str(self.tv_id)
+
+
+
+
 
 
 class Celeb(models.Model):
@@ -49,9 +60,13 @@ class Celeb(models.Model):
 		return 'Celeb'+str(self.celeb_id)
 
 
+
+
+
+
 # A block post with likes, the related series, and content with methods for like counting and detail url page.
 
-class Block(models.Model):
+class Movie_review(models.Model):
 	author=models.ForeignKey(User, on_delete=models.CASCADE, related_name='blocks', null=True, blank=True)
 	auth_name=models.CharField(max_length=25,null=True, blank=True)
 	content=models.CharField(max_length=4000, blank=False, null=False)
@@ -87,6 +102,11 @@ class Block(models.Model):
 
 	def __str__(self):
 		return '%s' % (self.content[:40]+'...')
+
+
+
+
+		
 
 class Anon_block(models.Model):
 	auth_name=models.CharField(max_length=25,null=True, blank=True)
